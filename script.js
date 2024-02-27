@@ -24,9 +24,10 @@ CALCULAR.addEventListener('click', () => {
         MAN.style.display = 'block'
     }else{
         ERROR.style.display = 'none'
-         let SC1500 = Math.round((((DATO*4)+7)/(DATO + 90))*1500)
-         let SC2000 =  Math.round((((DATO*4)+7)/(DATO + 90))*2000)
-        VOLDIARY.innerHTML = SC1500 + ' cc  SC*1500 ' + SC2000 + ' cc  SC*2000'
+         let voldiario = calSupCor(DATO)
+         let SC1500 = Math.round(voldiario*1500)
+         let SC2000 = Math.round(voldiario*2000)
+         VOLDIARY.innerHTML = SC1500 + ' SUP.CORPORAL *1500 ' + SC2000 + '   SUP.CORPORAL *2000 '
         VOLDIARY.style.display = 'block'
         FLU.style.display = 'none'
         MAN.style.display = 'none'
@@ -36,12 +37,15 @@ function calcFlujo(peso){
     let flujo=0
     if(peso<=10){
        flujo= 100*peso
-       return flujo
     }else if(peso<=20){
-        flujo= 1000+(50*(peso-10))
-        return flujo
+        flujo= 1000+(50*(peso-1))
     }else if(peso<30){
         flujo= 1500+((peso-20)*20)
-        return flujo
     }
+    return flujo
+}
+function calSupCor(peso){
+     let resto = parseInt(peso)
+     let flu = ((resto * 4 )+ 7)/resto
+    return flu   
 }
